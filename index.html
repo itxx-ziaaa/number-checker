@@ -88,23 +88,27 @@
     async function lookupNumber() {
       const num = document.getElementById("numberInput").value.trim();
       const resultDiv = document.getElementById("result");
-
+  
+      // Validate if the number is 10 digits
       if (!/^\d{10}$/.test(num)) {
         resultDiv.textContent = "❌ Enter a valid 10-digit number (no 0 or 92).";
         return;
       }
-
+  
       resultDiv.textContent = "⏳ Checking...";
-
+  
+      // Use a CORS proxy to bypass restrictions
+      const apiUrl = `https://cors-anywhere.herokuapp.com/https://tmphpscripts.xyz/Tajammal.php?num=${num}`;
+  
       try {
-        const response = await fetch(`https://tmphpscripts.xyz/Tajammal.php?num=${num}`);
+        const response = await fetch(apiUrl);
         const text = await response.text();
         resultDiv.textContent = text;
       } catch (error) {
         resultDiv.textContent = "❌ Error: Unable to connect. Try hosting this site online.";
       }
     }
-  </script>
+  </script>  
 
 </body>
 </html>
