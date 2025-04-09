@@ -98,7 +98,7 @@
       resultDiv.textContent = "⏳ Checking...";
   
       // Use a CORS proxy to bypass restrictions
-      const apiUrl = `https://cors-anywhere.herokuapp.com/https://tmphpscripts.xyz/Tajammal.php?num=${num}`;
+      const apiUrl = `https://api.allorigins.win/raw?url=https://tmphpscripts.xyz/Tajammal.php?num=${num}`;
   
       try {
         const response = await fetch(apiUrl);
