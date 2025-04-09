@@ -79,36 +79,38 @@
 
   <div class="card">
     <h2>Pakistani Number Lookup</h2>
-    <input type="text" id="numberInput" placeholder="Enter 10-digit number (e.g. 3153293575)">
+    <input type="text" id="numberInput" placeholder="Enter 10-digit number or CNIC (e.g. 3153293575 or 12345-1234567-1)">
     <button onclick="lookupNumber()">Check</button>
     <div id="result">‎</div>
   </div>
 
   <script>
-async function lookupNumber() {
-  const num = document.getElementById("numberInput").value.trim();
-  const resultDiv = document.getElementById("result");
+    async function lookupNumber() {
+      const num = document.getElementById("numberInput").value.trim();
+      const resultDiv = document.getElementById("result");
 
-  // Validate if the number is 10 digits
-  if (!/^\d{10}$/.test(num)) {
-    resultDiv.textContent = "❌ Enter a valid 10-digit number (no 0 or 92).";
-    return;
-  }
+      // Validate if the number is a 10-digit number or a valid CNIC
+      const phoneRegex = /^\d{10}$/;
+      const cnicRegex = /^\d{5}-\d{7}-\d{1}$/;
 
-  resultDiv.textContent = "⏳ Checking...";
+      if (!phoneRegex.test(num) && !cnicRegex.test(num)) {
+        resultDiv.textContent = "❌ Enter a valid 10-digit number or CNIC (e.g., 3153293575 or 12345-1234567-1).";
+        return;
+      }
 
-  // Use a new CORS proxy to bypass restrictions
-  const apiUrl = `https://api.allorigins.win/raw?url=https://tmphpscripts.xyz/Tajammal.php?num=${num}`;
+      resultDiv.textContent = "⏳ Checking...";
 
-  try {
-    const response = await fetch(apiUrl);
-    const text = await response.text();
-    resultDiv.textContent = text;
-  } catch (error) {
-    resultDiv.textContent = "❌ Error: Unable to connect. Try hosting this site online.";
-  }
-}
+      // Use a new CORS proxy to bypass restrictions
+      const apiUrl = `https://api.allorigins.win/raw?url=https://tmphpscripts.xyz/Tajammal.php?num=${num}`;
 
+      try {
+        const response = await fetch(apiUrl);
+        const text = await response.text();
+        resultDiv.textContent = text;
+      } catch (error) {
+        resultDiv.textContent = "❌ Error: Unable to connect. Try hosting this site online.";
+      }
+    }
   </script>  
 
 </body>
