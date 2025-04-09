@@ -79,7 +79,7 @@
 
   <div class="card">
     <h2>Pakistani Number Lookup</h2>
-    <input type="text" id="numberInput" placeholder="Enter 10-digit number or CNIC (e.g. 3153293575 or 12345-1234567-1)">
+    <input type="text" id="numberInput" placeholder="Enter 10-digit number or CNIC (e.g. 3153293575 or 1234567890123)">
     <button onclick="lookupNumber()">Check</button>
     <div id="result">‎</div>
   </div>
@@ -89,12 +89,12 @@
       const num = document.getElementById("numberInput").value.trim();
       const resultDiv = document.getElementById("result");
 
-      // Validate if the number is a 10-digit number or a valid CNIC
+      // Validate if the number is a 10-digit number or a 13-digit CNIC (no dashes)
       const phoneRegex = /^\d{10}$/;
-      const cnicRegex = /^\d{5}-\d{7}-\d{1}$/;
+      const cnicRegex = /^\d{13}$/;
 
       if (!phoneRegex.test(num) && !cnicRegex.test(num)) {
-        resultDiv.textContent = "❌ Enter a valid 10-digit number or CNIC (e.g., 3153293575 or 12345-1234567-1).";
+        resultDiv.textContent = "❌ Enter a valid 10-digit number or CNIC (e.g., 3153293575 or 1234567890123).";
         return;
       }
 
